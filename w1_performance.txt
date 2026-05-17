@@ -1,7 +1,7 @@
-sortArray :
+sortArray : O(n^2)
 
-StandardDeviation1:
+StandardDeviation1: O(n)
 
-StandardDeviation2:
+StandardDeviation2:O(n^2)
  
 StandardDeviation3:
