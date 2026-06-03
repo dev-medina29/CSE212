@@ -31,36 +31,56 @@ public class Maze
     /// can't move, throw an InvalidOperationException with the message "Can't go that way!".
     /// </summary>
     public void MoveLeft()
+{
+    bool[] moves = _mazeMap[(_currX, _currY)];
+    if (moves[0]) // left
     {
-        // FILL IN CODE
+        _currX -= 1;
     }
+    else
+    {
+        throw new InvalidOperationException("Can't go that way!");
+    }
+}
 
-    /// <summary>
-    /// Check to see if you can move right.  If you can, then move.  If you
-    /// can't move, throw an InvalidOperationException with the message "Can't go that way!".
-    /// </summary>
-    public void MoveRight()
+public void MoveRight()
+{
+    bool[] moves = _mazeMap[(_currX, _currY)];
+    if (moves[1]) // right
     {
-        // FILL IN CODE
+        _currX += 1;
     }
+    else
+    {
+        throw new InvalidOperationException("Can't go that way!");
+    }
+}
 
-    /// <summary>
-    /// Check to see if you can move up.  If you can, then move.  If you
-    /// can't move, throw an InvalidOperationException with the message "Can't go that way!".
-    /// </summary>
-    public void MoveUp()
+public void MoveUp()
+{
+    bool[] moves = _mazeMap[(_currX, _currY)];
+    if (moves[2]) // up
     {
-        // FILL IN CODE
+        _currY -= 1;
     }
+    else
+    {
+        throw new InvalidOperationException("Can't go that way!");
+    }
+}
 
-    /// <summary>
-    /// Check to see if you can move down.  If you can, then move.  If you
-    /// can't move, throw an InvalidOperationException with the message "Can't go that way!".
-    /// </summary>
-    public void MoveDown()
+public void MoveDown()
+{
+    bool[] moves = _mazeMap[(_currX, _currY)];
+    if (moves[3]) // down
     {
-        // FILL IN CODE
+        _currY += 1;
     }
+    else
+    {
+        throw new InvalidOperationException("Can't go that way!");
+    }
+}
 
     public string GetStatus()
     {

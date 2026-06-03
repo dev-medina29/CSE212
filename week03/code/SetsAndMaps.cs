@@ -1,3 +1,5 @@
+using System.IO.Pipelines;
+using System.Runtime.ConstrainedExecution;
 using System.Text.Json;
 
 public static class SetsAndMaps
@@ -22,7 +24,23 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+  
+        List<string> result=new List<string>();
+        List<string> seen=new List<string>();
+        foreach(var word in words)
+        {
+           var reverse= new string(word.Reverse().ToArray());
+           if ( words.Contains(reverse) && word[0]!=word[1] )
+            {
+                if(!seen.Contains(word) && !seen.Contains(reverse))
+                {
+                  seen.Add(word); 
+                  result.Add($"{word} & {reverse}");  
+                } 
+            } 
+        }
+        return result.ToArray();
+        
     }
 
     /// <summary>
@@ -39,10 +57,22 @@ public static class SetsAndMaps
     public static Dictionary<string, int> SummarizeDegrees(string filename)
     {
         var degrees = new Dictionary<string, int>();
+        // int numb;
+        // numb=0;
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+            string degree=fields[3];
+            if(degrees.ContainsKey(degree))
+            {
+                degrees[degree]+=1;
+            }
+            else
+            {
+              degrees[degree]=1;  
+            }
+
         }
 
         return degrees;
@@ -66,7 +96,25 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
+        
         // TODO Problem 3 - ADD YOUR CODE HERE
+        word1=word1.Replace(" ","").ToLower();
+        word2=word2.Replace(" ","").ToLower();
+
+        if (word1.Length == word2.Length)
+        {
+            foreach(char letter in word1!)
+            {
+                if(word2.Contains(letter)){
+                    var index=word2.IndexOf(letter);
+                    word2=word2.Remove(index,1);
+                }
+                if (word2.Length==0)
+                {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
