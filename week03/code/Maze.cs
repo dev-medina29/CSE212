@@ -17,7 +17,7 @@
 public class Maze
 {
     private readonly Dictionary<ValueTuple<int, int>, bool[]> _mazeMap;
-    private int _currX = 1;
+    private int _currX = 2;
     private int _currY = 1;
 
     public Maze(Dictionary<ValueTuple<int, int>, bool[]> mazeMap)
