@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Globalization;
 
 public class LinkedList : IEnumerable<int>
 {
@@ -32,7 +33,23 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public void InsertTail(int value)
     {
-        // TODO Problem 1
+        Node end = new Node(value)
+        {
+            Prev = _tail,
+            Next = null
+        };
+
+        if (_head == null)
+        {
+            _head = end;
+            _tail = end;
+        }
+        else
+        {
+            _tail!.Next = end;
+            _tail = end;
+        }
+       
     }
 
 
