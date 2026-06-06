@@ -135,6 +135,48 @@ public class LinkedList : IEnumerable<int>
     public void Remove(int value)
     {
         // TODO Problem 3
+        if (_head ==null)
+        {
+             return;          
+        }
+            
+
+        // If the value is at the head, remove the head
+        if (_head!.Data == value)
+        {
+            RemoveHead();
+            return;
+        }
+
+        // If the value is at the tail, remove the tail
+        if (_tail is not null && _tail.Data == value)
+        {
+            RemoveTail();
+            return;
+        }
+
+        // Otherwise search for the node before the one to remove
+        Node? current = _head;
+        while (current is not null && current.Next is not null && current.Next.Data != value)
+        {
+            current = current.Next;
+        }
+
+        // If we found a node whose Next contains the value, remove that node
+        if (current is not null && current.Next is not null)
+        {
+            Node? toRemove = current.Next;
+            Node? after = toRemove.Next;
+
+            // Bypass the node
+            current.Next = after;
+
+            // Fix the back-link on the node after the removed node
+            if (after is not null)
+            {
+                after.Prev = current;
+            }
+        }
     }
 
     /// <summary>
@@ -143,10 +185,18 @@ public class LinkedList : IEnumerable<int>
     public void Replace(int oldValue, int newValue)
     {
         // TODO Problem 4
+        Node? current = _head;
+        while (current is not null)
+        {
+            if (current.Data == oldValue)
+            {
+                current.Data = newValue;
+            }
+            current = current.Next;
+        }
     }
 
     /// <summary>
-    /// Yields all values in the linked list
     /// </summary>
     IEnumerator IEnumerable.GetEnumerator()
     {
@@ -154,7 +204,6 @@ public class LinkedList : IEnumerable<int>
         return this.GetEnumerator();
     }
 
-    /// <summary>
     /// Iterate forward through the Linked List
     /// </summary>
     public IEnumerator<int> GetEnumerator()
@@ -173,14 +222,18 @@ public class LinkedList : IEnumerable<int>
     public IEnumerable Reverse()
     {
         // TODO Problem 5
-        yield return 0; // replace this line with the correct yield return statement(s)
+         var curr = _tail; // Start at the end since this is a backward iteration.
+        while (curr is not null)
+        {
+            yield return curr.Data;
+            curr = curr.Prev; 
+        }
     }
 
     public override string ToString()
     {
         return "<LinkedList>{" + string.Join(", ", this) + "}";
     }
-
     // Just for testing.
     public Boolean HeadAndTailAreNull()
     {
