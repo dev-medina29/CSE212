@@ -81,7 +81,16 @@ public class LinkedList : IEnumerable<int>
     /// </summary>
     public void RemoveTail()
     {
-        // TODO Problem 2
+        if(_tail == _head){
+            _tail=null;
+            _head=null;
+        }
+        else
+        {
+            _tail!.Prev!.Next=null;
+            _tail=_tail.Prev;
+
+        }
     }
 
     /// <summary>
