@@ -148,8 +148,14 @@ public static class Recursion
             results.Add(pattern);
             return;
         }
-        WildcardBinary(pattern[..index] + "0" + pattern[(index + 1)..], results);
-        WildcardBinary(pattern[..index] + "1" + pattern[(index + 1)..], results);
+
+        // Replace '*' with '0'
+        string withZero = pattern.Substring(0, index) + "0" + pattern.Substring(index + 1);
+        WildcardBinary(withZero, results);
+
+        // Replace '*' with '1'
+        string withOne = pattern.Substring(0, index) + "1" + pattern.Substring(index + 1);
+        WildcardBinary(withOne, results);
     }
     
 
